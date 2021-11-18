@@ -1,0 +1,37 @@
+---
+name: Fedora 34 Publish
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/fedora-34-publish.yml"
+      - "fedora/34"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./fedora/34
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          push: true
+          tags: mrlesmithjr/fedora:34
