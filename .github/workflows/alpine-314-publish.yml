@@ -2,12 +2,8 @@
 name: Alpine 3.14 Publish
 on:
   push:
-    branches-ignore: [main]
-    paths:
-      - ".github/workflows/alpine-314-publish.yml"
-      - "alpine/3.14"
-  pull_request:
-    branches: [develop, main]
+    branches:
+      - main
     paths:
       - ".github/workflows/alpine-314-publish.yml"
       - "alpine/3.14"
