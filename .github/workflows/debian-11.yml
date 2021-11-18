@@ -1,0 +1,25 @@
+---
+name: Debian 11
+on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - ".github/workflows/debian-11.yml"
+      - "debian/10"
+  pull_request:
+    branches: [develop, main]
+    paths:
+      - ".github/workflows/debian-11.yml"
+      - "debian/11"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Docker Build
+        run: |
+          cd debian/11
+          docker build -t debian:11 .

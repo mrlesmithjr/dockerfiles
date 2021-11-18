@@ -1,0 +1,25 @@
+---
+name: CentOS 8
+on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - ".github/workflows/centos-8.yml"
+      - "centos/8"
+  pull_request:
+    branches: [develop, main]
+    paths:
+      - ".github/workflows/centos-8.yml"
+      - "centos/8"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Docker Build
+        run: |
+          cd centos/8
+          docker build -t centos:8 .
