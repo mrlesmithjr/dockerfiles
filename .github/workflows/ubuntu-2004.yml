@@ -1,0 +1,25 @@
+---
+name: Ubuntu 20.04
+on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - ".github/workflows/ubuntu-2004.yml"
+      - "ubuntu/20.04"
+  pull_request:
+    branches: [develop, main]
+    paths:
+      - ".github/workflows/ubuntu-2004.yml"
+      - "ubuntu/20.04"
+
+jobs:
+  build:
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Docker Build
+        run: |
+          cd ubuntu/20.04
+          docker build -t ubuntu:20.04 .

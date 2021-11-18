@@ -1,0 +1,25 @@
+---
+name: CentOS 7
+on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - ".github/workflows/centos-7.yml"
+      - "centos/7"
+  pull_request:
+    branches: [develop, main]
+    paths:
+      - ".github/workflows/centos-7.yml"
+      - "centos/7"
+
+jobs:
+  build:
+    runs-on: macos-10.15
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Docker Build
+        run: |
+          cd centos/7
+          docker build -t centos:7 .
