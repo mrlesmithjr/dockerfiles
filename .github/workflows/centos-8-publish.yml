@@ -25,6 +25,6 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: centos/8
+          context: ./centos/8
           push: true
           tags: mrlesmithjr/centos:8
