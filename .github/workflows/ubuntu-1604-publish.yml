@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/workflows/ubuntu-1804-publish.yml"
+      - ".github/workflows/ubuntu-1604-publish.yml"
       - "ubuntu/16.04"
 
 jobs:

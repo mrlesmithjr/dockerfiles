@@ -4,12 +4,12 @@ on:
   push:
     branches-ignore: [main]
     paths:
-      - ".github/workflows/ubuntu-1804.yml"
+      - ".github/workflows/ubuntu-1604.yml"
       - "ubuntu/16.04"
   pull_request:
     branches: [develop, main]
     paths:
-      - ".github/workflows/ubuntu-1804.yml"
+      - ".github/workflows/ubuntu-1604.yml"
       - "ubuntu/16.04"
 
 jobs:
