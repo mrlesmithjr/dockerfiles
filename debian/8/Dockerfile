@@ -2,7 +2,7 @@ FROM debian:8
 ENV container docker
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends python3 sudo systemd
+    apt-get install -y --no-install-recommends python sudo systemd
 
 CMD ["/lib/systemd/systemd"]
 
