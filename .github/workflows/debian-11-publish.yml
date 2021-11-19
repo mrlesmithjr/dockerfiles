@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - ".github/workflows/debian-11-publish.yml"
-      - "debian/11"
+      - "debian/11/**"
 
 jobs:
   docker:

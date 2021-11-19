@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - ".github/workflows/alpine-313-publish.yml"
-      - "alpine/3.13"
+      - "alpine/3.13/**"
 
 jobs:
   docker:

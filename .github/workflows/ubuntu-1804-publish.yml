@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - ".github/workflows/ubuntu-1804-publish.yml"
-      - "ubuntu/18.04"
+      - "ubuntu/18.04/**"
 
 jobs:
   docker:

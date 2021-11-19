@@ -5,12 +5,12 @@ on:
     branches-ignore: [main]
     paths:
       - ".github/workflows/debian-8.yml"
-      - "debian/8"
+      - "debian/8/**"
   pull_request:
     branches: [develop, main]
     paths:
       - ".github/workflows/debian-8.yml"
-      - "debian/8"
+      - "debian/8/**"
 
 jobs:
   docker:

@@ -5,12 +5,12 @@ on:
     branches-ignore: [main]
     paths:
       - ".github/workflows/ubuntu-2004.yml"
-      - "ubuntu/20.04"
+      - "ubuntu/20.04/**"
   pull_request:
     branches: [develop, main]
     paths:
       - ".github/workflows/ubuntu-2004.yml"
-      - "ubuntu/20.04"
+      - "ubuntu/20.04/**"
 
 jobs:
   docker:

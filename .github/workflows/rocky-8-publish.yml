@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - ".github/workflows/rocky-8-publish.yml"
-      - "rocky/8"
+      - "rocky/8/**"
 
 jobs:
   docker:
