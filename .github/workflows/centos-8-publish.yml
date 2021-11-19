@@ -8,8 +8,38 @@ on:
       - ".github/workflows/centos-8-publish.yml"
       - "centos/8/**"
 
+env:
+  DOCKERFILE_DIR: centos/8
+  TAG: mrlesmithjr/centos:8
+
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - uses: actions/cache@v2
+        with:
+          path: ~/Library/Caches/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+          brew install hadolint
+      - name: Run pre-commit checks
+        run: |
+          SKIP=no-commit-to-branch pre-commit run --files ${DOCKERFILE_DIR}/**
+
   docker:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,11 +57,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build and push
+      - name: Build
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./centos/8
+          context: ${{ env.DOCKERFILE_DIR }}
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: mrlesmithjr/centos:8
+          tags: ${{ env.TAG }}
