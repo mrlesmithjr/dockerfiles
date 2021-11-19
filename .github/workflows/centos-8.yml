@@ -5,12 +5,12 @@ on:
     branches-ignore: [main]
     paths:
       - ".github/workflows/centos-8.yml"
-      - "centos/8"
+      - "centos/8/**"
   pull_request:
     branches: [develop, main]
     paths:
       - ".github/workflows/centos-8.yml"
-      - "centos/8"
+      - "centos/8/**"
 
 jobs:
   docker:

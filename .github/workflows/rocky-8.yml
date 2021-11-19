@@ -5,12 +5,12 @@ on:
     branches-ignore: [main]
     paths:
       - ".github/workflows/rocky-8.yml"
-      - "rocky/8"
+      - "rocky/8/**"
   pull_request:
     branches: [develop, main]
     paths:
       - ".github/workflows/rocky-8.yml"
-      - "rocky/8"
+      - "rocky/8/**"
 
 jobs:
   docker:

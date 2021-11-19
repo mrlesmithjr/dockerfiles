@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - ".github/workflows/debian-8-publish.yml"
-      - "debian/8"
+      - "debian/8/**"
 
 jobs:
   docker:

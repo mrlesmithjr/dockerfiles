@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - ".github/workflows/fedora-34-publish.yml"
-      - "fedora/34"
+      - "fedora/34/**"
 
 jobs:
   docker:

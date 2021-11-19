@@ -5,12 +5,12 @@ on:
     branches-ignore: [main]
     paths:
       - ".github/workflows/alpine-313.yml"
-      - "alpine/3.13"
+      - "alpine/3.13/**"
   pull_request:
     branches: [develop, main]
     paths:
       - ".github/workflows/alpine-313.yml"
-      - "alpine/3.13"
+      - "alpine/3.13/**"
 
 jobs:
   docker:

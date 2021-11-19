@@ -5,12 +5,12 @@ on:
     branches-ignore: [main]
     paths:
       - ".github/workflows/debian-10.yml"
-      - "debian/10"
+      - "debian/10/**"
   pull_request:
     branches: [develop, main]
     paths:
       - ".github/workflows/debian-10.yml"
-      - "debian/10"
+      - "debian/10/**"
 
 jobs:
   docker:

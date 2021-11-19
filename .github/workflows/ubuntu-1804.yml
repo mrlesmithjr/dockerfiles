@@ -5,12 +5,12 @@ on:
     branches-ignore: [main]
     paths:
       - ".github/workflows/ubuntu-1804.yml"
-      - "ubuntu/18.04"
+      - "ubuntu/18.04/**"
   pull_request:
     branches: [develop, main]
     paths:
       - ".github/workflows/ubuntu-1804.yml"
-      - "ubuntu/18.04"
+      - "ubuntu/18.04/**"
 
 jobs:
   docker:

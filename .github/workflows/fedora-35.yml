@@ -5,12 +5,12 @@ on:
     branches-ignore: [main]
     paths:
       - ".github/workflows/fedora-35.yml"
-      - "fedora/35"
+      - "fedora/35/**"
   pull_request:
     branches: [develop, main]
     paths:
       - ".github/workflows/fedora-35.yml"
-      - "fedora/35"
+      - "fedora/35/**"
 
 jobs:
   docker:

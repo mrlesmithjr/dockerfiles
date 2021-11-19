@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - ".github/workflows/centos-7-publish.yml"
-      - "centos/7"
+      - "centos/7/**"
 
 jobs:
   docker:
