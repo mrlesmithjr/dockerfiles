@@ -1,4 +1,4 @@
-FROM centos:8
+FROM quay.io/centos/centos:stream8
 ENV container docker
 
 # hadolint ignore=DL3003,SC2086
