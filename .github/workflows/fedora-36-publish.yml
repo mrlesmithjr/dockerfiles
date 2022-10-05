@@ -1,16 +1,16 @@
 ---
-name: Fedora 34 Publish
+name: Fedora 36 Publish
 on:
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/fedora-34-publish.yml"
-      - "fedora/34/**"
+      - ".github/workflows/fedora-36-publish.yml"
+      - "fedora/36/**"
 
 env:
-  DOCKERFILE_DIR: fedora/34
-  TAG: mrlesmithjr/fedora:34
+  DOCKERFILE_DIR: fedora/36
+  TAG: mrlesmithjr/fedora:36
 
 jobs:
   lint:
@@ -19,10 +19,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Set up Python 3.8
+      - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.9
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
       - uses: actions/cache@v2
         with:
           path: ~/Library/Caches/pip

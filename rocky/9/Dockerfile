@@ -1,8 +1,5 @@
-FROM fedora:34
+FROM rockylinux/rockylinux:9
 ENV container docker
-
-RUN dnf install -y python3 sudo systemd && \
-    dnf clean all
 
 # hadolint ignore=DL3003,SC2086
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
@@ -15,6 +12,9 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     rm -f /lib/systemd/system/basic.target.wants/*;\
     rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-CMD ["/usr/sbin/init"]
+RUN yum install -y epel-release python3 sudo && \
+    yum clean all
 
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
+
+CMD ["/usr/sbin/init"]
