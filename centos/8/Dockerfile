@@ -13,7 +13,7 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     rm -f /lib/systemd/system/anaconda.target.wants/*;
 
 RUN dnf config-manager --set-enabled powertools && \
-    dnf install -y --refresh epel-release python3 sudo && \
+    dnf install -y --refresh epel-release python3 python39-devel.x86_64 sudo && \
     dnf clean all
 
 CMD ["/usr/sbin/init"]
