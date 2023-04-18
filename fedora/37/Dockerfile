@@ -1,4 +1,4 @@
-FROM fedora:35
+FROM fedora:37
 ENV container docker
 
 RUN dnf install -y python3 sudo systemd && \
