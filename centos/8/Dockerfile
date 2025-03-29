@@ -1,5 +1,9 @@
 FROM quay.io/centos/centos:stream8
-ENV container docker
+ENV container=docker
+
+RUN sed -i s/mirror.centos.org/vault.centos.org/g /etc/yum.repos.d/CentOS-*.repo && \
+    sed -i s/^#.*baseurl=http/baseurl=http/g /etc/yum.repos.d/CentOS-*.repo && \
+    sed -i s/^mirrorlist=http/#mirrorlist=http/g /etc/yum.repos.d/CentOS-*.repo
 
 # hadolint ignore=DL3003,SC2086
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
@@ -12,8 +16,9 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     rm -f /lib/systemd/system/basic.target.wants/*;\
     rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-RUN dnf config-manager --set-enabled powertools && \
-    dnf install -y --refresh epel-release python3 python39-devel sudo && \
+RUN dnf -y install 'dnf-command(config-manager)' && \
+    dnf config-manager --set-enabled powertools && \
+    dnf -y --refresh install epel-release python3 python39-devel sudo && \
     dnf clean all
 
 CMD ["/usr/sbin/init"]
