@@ -1,10 +1,21 @@
 FROM quay.io/centos/centos:stream10
 ENV container=docker
 
-RUN dnf install -y --refresh dnf-utils python3 python3-devel sudo https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm && \
+RUN dnf -y --refresh install 'dnf-command(config-manager)' https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
     dnf config-manager --set-enabled crb && \
-    dnf install -y epel-release && \
+    dnf -y install dnf-utils epel-next-release python3 python3-devel sudo systemd && \
     dnf clean all
+
+# hadolint ignore=DL3003,SC2086
+RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
+    systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+    rm -f /lib/systemd/system/multi-user.target.wants/*;\
+    rm -f /etc/systemd/system/*.wants/*;\
+    rm -f /lib/systemd/system/local-fs.target.wants/*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+    rm -f /lib/systemd/system/basic.target.wants/*;\
+    rm -f /lib/systemd/system/anaconda.target.wants/*;
 
 CMD ["/usr/sbin/init"]
 
