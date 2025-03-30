@@ -1,9 +1,9 @@
 FROM quay.io/centos/centos:stream10
 ENV container=docker
 
-RUN dnf -y --refresh install 'dnf-command(config-manager)' https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
+RUN dnf -y --refresh install 'dnf-command(config-manager)' epel-release && \
     dnf config-manager --set-enabled crb && \
-    dnf -y install dnf-utils epel-next-release python3 python3-devel sudo systemd && \
+    dnf -y install dnf-utils python3 python3-devel sudo systemd && \
     dnf clean all
 
 # hadolint ignore=DL3003,SC2086
