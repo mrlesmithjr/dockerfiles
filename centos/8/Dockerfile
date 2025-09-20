@@ -1,5 +1,5 @@
 FROM quay.io/centos/centos:stream8
-ENV container docker
+ENV container=docker
 
 # hadolint ignore=DL3003,SC2086
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \

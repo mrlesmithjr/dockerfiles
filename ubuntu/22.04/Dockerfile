@@ -1,5 +1,5 @@
 FROM ubuntu:22.04
-ENV container docker
+ENV container=docker
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends python3 sudo systemd && \

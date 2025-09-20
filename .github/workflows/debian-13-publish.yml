@@ -1,20 +1,16 @@
 ---
-name: Ubuntu 20.04
+name: Debian 13 Publish
 on:
   push:
-    branches-ignore: [main]
+    branches:
+      - main
     paths:
-      - ".github/workflows/ubuntu-2004.yml"
-      - "ubuntu/20.04/**"
-  pull_request:
-    branches: [develop, main]
-    paths:
-      - ".github/workflows/ubuntu-2004.yml"
-      - "ubuntu/20.04/**"
+      - ".github/workflows/debian-13-publish.yml"
+      - "debian/13/**"
 
 env:
-  DOCKERFILE_DIR: ubuntu/20.04
-  TAG: mrlesmithjr/ubuntu:20.04
+  DOCKERFILE_DIR: debian/13
+  TAG: mrlesmithjr/debian:13
 
 jobs:
   lint:
@@ -69,5 +65,5 @@ jobs:
         with:
           context: ${{ env.DOCKERFILE_DIR }}
           platforms: linux/amd64,linux/arm64,linux/arm/v7
-          push: false
+          push: true
           tags: ${{ env.TAG }}

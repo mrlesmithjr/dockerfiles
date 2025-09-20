@@ -1,5 +1,5 @@
 FROM rockylinux/rockylinux:8
-ENV container docker
+ENV container=docker
 
 # hadolint ignore=DL3003,SC2086
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
@@ -12,7 +12,7 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     rm -f /lib/systemd/system/basic.target.wants/*;\
     rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-RUN yum install -y epel-release python3 sudo && \
+RUN yum install -y epel-release python3.12 sudo && \
     yum clean all
 
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]

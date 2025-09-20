@@ -16,16 +16,16 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
         with:
-          submodules: recursive
+          submodules: true
       - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: ~/Library/Caches/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
@@ -44,9 +44,9 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
         with:
-          submodules: recursive
+          submodules: true
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
         with:
