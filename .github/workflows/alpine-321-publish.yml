@@ -1,16 +1,16 @@
 ---
-name: Ubuntu 16.04 Publish
+name: Alpine 3.21 Publish
 on:
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/ubuntu-1604-publish.yml"
-      - "ubuntu/16.04/**"
+      - ".github/workflows/alpine-321-publish.yml"
+      - "alpine/3.21/**"
 
 env:
-  DOCKERFILE_DIR: ubuntu/16.04
-  TAG: mrlesmithjr/ubuntu:16.04
+  DOCKERFILE_DIR: alpine/3.21
+  TAG: mrlesmithjr/alpine:3.21
 
 jobs:
   lint:

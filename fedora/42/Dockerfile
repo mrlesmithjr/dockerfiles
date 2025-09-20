@@ -1,5 +1,8 @@
-FROM quay.io/centos/centos:centos7
+FROM fedora:42
 ENV container=docker
+
+RUN dnf install -y python3 sudo systemd && \
+    dnf clean all
 
 # hadolint ignore=DL3003,SC2086
 RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
@@ -11,9 +14,6 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
     rm -f /lib/systemd/system/basic.target.wants/*;\
     rm -f /lib/systemd/system/anaconda.target.wants/*;
-
-RUN yum install -y epel-release python3 python3-dev sudo && \
-    yum clean all
 
 CMD ["/usr/sbin/init"]
 

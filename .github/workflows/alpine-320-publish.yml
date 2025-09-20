@@ -1,16 +1,16 @@
 ---
-name: Ubuntu 16.04 Publish
+name: Alpine 3.20 Publish
 on:
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/ubuntu-1604-publish.yml"
-      - "ubuntu/16.04/**"
+      - ".github/workflows/alpine-320-publish.yml"
+      - "alpine/3.20/**"
 
 env:
-  DOCKERFILE_DIR: ubuntu/16.04
-  TAG: mrlesmithjr/ubuntu:16.04
+  DOCKERFILE_DIR: alpine/3.20
+  TAG: mrlesmithjr/alpine:3.20
 
 jobs:
   lint:
@@ -47,18 +47,22 @@ jobs:
       - uses: actions/checkout@v5
         with:
           submodules: true
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        with:
-          image: tonistiigi/binfmt:latest
-          platforms: all
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: all
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Build
         id: docker_build
         uses: docker/build-push-action@v2

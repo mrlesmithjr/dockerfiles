@@ -1,16 +1,20 @@
 ---
-name: Ubuntu 16.04 Publish
+name: Alpine 3.21
 on:
   push:
-    branches:
-      - main
+    branches-ignore: [main]
     paths:
-      - ".github/workflows/ubuntu-1604-publish.yml"
-      - "ubuntu/16.04/**"
+      - ".github/workflows/alpine-321.yml"
+      - "alpine/3.21/**"
+  pull_request:
+    branches: [develop, main]
+    paths:
+      - ".github/workflows/alpine-321.yml"
+      - "alpine/3.21/**"
 
 env:
-  DOCKERFILE_DIR: ubuntu/16.04
-  TAG: mrlesmithjr/ubuntu:16.04
+  DOCKERFILE_DIR: alpine/3.21
+  TAG: mrlesmithjr/alpine:3.21
 
 jobs:
   lint:
@@ -65,5 +69,5 @@ jobs:
         with:
           context: ${{ env.DOCKERFILE_DIR }}
           platforms: linux/amd64,linux/arm64,linux/arm/v7
-          push: true
+          push: false
           tags: ${{ env.TAG }}

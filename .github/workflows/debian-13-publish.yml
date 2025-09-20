@@ -1,16 +1,16 @@
 ---
-name: Ubuntu 16.04 Publish
+name: Debian 13 Publish
 on:
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/ubuntu-1604-publish.yml"
-      - "ubuntu/16.04/**"
+      - ".github/workflows/debian-13-publish.yml"
+      - "debian/13/**"
 
 env:
-  DOCKERFILE_DIR: ubuntu/16.04
-  TAG: mrlesmithjr/ubuntu:16.04
+  DOCKERFILE_DIR: debian/13
+  TAG: mrlesmithjr/debian:13
 
 jobs:
   lint:
