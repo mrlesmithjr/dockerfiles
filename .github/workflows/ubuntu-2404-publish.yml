@@ -37,7 +37,7 @@ jobs:
         uses: Homebrew/actions/setup-homebrew@master
       - name: Install dependencies
         run: |
-          apt -y install python3-pip
+          python3 -m pip install --upgrade pip --user
           pip install -r requirements.txt -r requirements-dev.txt
           brew install hadolint
       - name: Run pre-commit checks
