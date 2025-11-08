@@ -9,4 +9,3 @@ RUN apt-get update && \
 CMD ["/lib/systemd/systemd"]
 
 VOLUME ["/sys/fs/cgroup", "/tmp", "/run"]
-
