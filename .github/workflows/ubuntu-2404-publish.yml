@@ -1,16 +1,16 @@
 ---
-name: Fedora 41 Publish
+name: Ubuntu 24.04 Publish
 on:
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/fedora-41-publish.yml"
-      - "fedora/41/**"
+      - ".github/workflows/ubuntu-2404-publish.yml"
+      - "ubuntu/24.04/**"
 
 env:
-  DOCKERFILE_DIR: fedora/41
-  TAG: mrlesmithjr/fedora:41
+  DOCKERFILE_DIR: ubuntu/24.04
+  TAG: mrlesmithjr/ubuntu:24.04
 
 jobs:
   lint:
@@ -19,18 +19,19 @@ jobs:
       - uses: actions/checkout@v5
         with:
           submodules: true
-      - name: Set up Python 3.9
+      - name: Set up Python 3.8
         uses: actions/setup-python@v2
         with:
-          python-version: 3.9
-      - name: Set up Homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+          python-version: 3.8
       - uses: actions/cache@v4
         with:
           path: ~/Library/Caches/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@master
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -64,6 +65,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{ env.DOCKERFILE_DIR }}
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: ${{ env.TAG }}
