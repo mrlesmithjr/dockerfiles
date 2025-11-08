@@ -1,7 +1,7 @@
 FROM fedora:43
 ENV container=docker
 
-RUN dnf install -y python3 sudo systemd && \
+RUN dnf install -y python3 sudo systemd python3-libdnf5 && \
     dnf clean all
 
 # hadolint ignore=DL3003,SC2086
