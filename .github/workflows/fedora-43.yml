@@ -1,16 +1,20 @@
 ---
-name: Fedora 41 Publish
+name: Fedora 43
 on:
   push:
-    branches:
-      - main
+    branches-ignore: [main]
     paths:
-      - ".github/workflows/fedora-41-publish.yml"
-      - "fedora/41/**"
+      - ".github/workflows/fedora-43.yml"
+      - "fedora/43/**"
+  pull_request:
+    branches: [develop, main]
+    paths:
+      - ".github/workflows/fedora-43.yml"
+      - "fedora/43/**"
 
 env:
-  DOCKERFILE_DIR: fedora/41
-  TAG: mrlesmithjr/fedora:41
+  DOCKERFILE_DIR: fedora/43
+  TAG: mrlesmithjr/fedora:43
 
 jobs:
   lint:
@@ -65,5 +69,5 @@ jobs:
         with:
           context: ${{ env.DOCKERFILE_DIR }}
           platforms: linux/amd64,linux/arm64
-          push: true
+          push: false
           tags: ${{ env.TAG }}
